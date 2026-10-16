@@ -95,7 +95,7 @@ jan_feb_flights <- jan_feb_flights %>%
   left_join(weather, by = c("origin", "year", "month", "day", "hour")) 
 eval=TRUE
 
-view(jan_feb_flights)
+
 ```
 
 ```{r}
@@ -107,7 +107,7 @@ view(jan_feb_flights)
 
 Describe the difference in wind speed when wind_gust is missing vs not missing:
 
-*Your answer here*
+ANS: Low wind speed when wind gust is NA
 
 ```{r eval=FALSE}
 ## REMEMBER TO SET eval=TRUE
