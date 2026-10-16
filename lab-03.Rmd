@@ -45,6 +45,7 @@ Are there missing values?
 ```
 
 ```{r}
+
 # which columns are integer
 jan_feb_flights |>
     select(where(is.integer))
@@ -55,6 +56,18 @@ jan_feb_flights |>
 
 # which columns are character
 jan_feb_flights |> select(where(is.character))
+
+# integer: year, month, day, dep_time, sched_dep_time, arr_time, sched_arr_time, flight
+
+
+# double: dep_delay, arr_delay, air_time, distance, hour, minute
+
+
+# character: carrier, tailnum, origin, dest
+
+# date-time: time_hour
+
+
 
 ```
 

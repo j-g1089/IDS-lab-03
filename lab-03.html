@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Team Name: Vladyslav, Joseph, David, Jerry" />
+<meta name="author" content="R_warriors: Vladyslav, Joseph, David, Jerry" />
 
 <meta name="date" content="2026-10-16" />
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">Lab 03 – Critical-Responsible Use of GenAI
 for Data Science</h1>
-<h4 class="author">Team Name: Vladyslav, Joseph, David, Jerry</h4>
+<h4 class="author">R_warriors: Vladyslav, Joseph, David, Jerry</h4>
 <h4 class="date">2026-10-16</h4>
 
 </div>
@@ -377,13 +377,81 @@ numeric, which are categorical/text/factor?<br />
 Are there missing values?</p>
 <pre class="r"><code># explore the types of the columns in jan_feb_flights</code></pre>
 <pre class="r"><code># which columns are integer
+jan_feb_flights |&gt;
+    select(where(is.integer))</code></pre>
+<pre><code>## # A tibble: 51,955 × 8
+##     year month   day dep_time sched_dep_time arr_time sched_arr_time flight
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;    &lt;int&gt;          &lt;int&gt;  &lt;int&gt;
+##  1  2013     1     1      517            515      830            819   1545
+##  2  2013     1     1      533            529      850            830   1714
+##  3  2013     1     1      542            540      923            850   1141
+##  4  2013     1     1      544            545     1004           1022    725
+##  5  2013     1     1      554            600      812            837    461
+##  6  2013     1     1      554            558      740            728   1696
+##  7  2013     1     1      555            600      913            854    507
+##  8  2013     1     1      557            600      709            723   5708
+##  9  2013     1     1      557            600      838            846     79
+## 10  2013     1     1      558            600      753            745    301
+## # ℹ 51,945 more rows</code></pre>
+<pre class="r"><code># which columns are double
+jan_feb_flights |&gt;
+    select(where(is.double))</code></pre>
+<pre><code>## # A tibble: 51,955 × 7
+##    dep_delay arr_delay air_time distance  hour minute time_hour          
+##        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;             
+##  1         2        11      227     1400     5     15 2013-01-01 05:00:00
+##  2         4        20      227     1416     5     29 2013-01-01 05:00:00
+##  3         2        33      160     1089     5     40 2013-01-01 05:00:00
+##  4        -1       -18      183     1576     5     45 2013-01-01 05:00:00
+##  5        -6       -25      116      762     6      0 2013-01-01 06:00:00
+##  6        -4        12      150      719     5     58 2013-01-01 05:00:00
+##  7        -5        19      158     1065     6      0 2013-01-01 06:00:00
+##  8        -3       -14       53      229     6      0 2013-01-01 06:00:00
+##  9        -3        -8      140      944     6      0 2013-01-01 06:00:00
+## 10        -2         8      138      733     6      0 2013-01-01 06:00:00
+## # ℹ 51,945 more rows</code></pre>
+<pre class="r"><code># which columns are character
+jan_feb_flights |&gt; select(where(is.character))</code></pre>
+<pre><code>## # A tibble: 51,955 × 4
+##    carrier tailnum origin dest 
+##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
+##  1 UA      N14228  EWR    IAH  
+##  2 UA      N24211  LGA    IAH  
+##  3 AA      N619AA  JFK    MIA  
+##  4 B6      N804JB  JFK    BQN  
+##  5 DL      N668DN  LGA    ATL  
+##  6 UA      N39463  EWR    ORD  
+##  7 B6      N516JB  EWR    FLL  
+##  8 EV      N829AS  LGA    IAD  
+##  9 B6      N593JB  JFK    MCO  
+## 10 AA      N3ALAA  LGA    ORD  
+## # ℹ 51,945 more rows</code></pre>
+<pre class="r"><code># integer: year, month, day, dep_time, sched_dep_time, arr_time, sched_arr_time, flight
 
 
-# which columns are double
+# double: dep_delay, arr_delay, air_time, distance, hour, minute
 
 
-# which columns are character</code></pre>
-<pre class="r"><code># which columns contain NA&#39;s</code></pre>
+# character: carrier, tailnum, origin, dest
+
+# date-time: time_hour</code></pre>
+<pre class="r"><code># which columns contain NA&#39;s
+jan_feb_flights |&gt;
+   select(where(~ any(is.na(.))))</code></pre>
+<pre><code>## # A tibble: 51,955 × 6
+##    dep_time dep_delay arr_time arr_delay tailnum air_time
+##       &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1      517         2      830        11 N14228       227
+##  2      533         4      850        20 N24211       227
+##  3      542         2      923        33 N619AA       160
+##  4      544        -1     1004       -18 N804JB       183
+##  5      554        -6      812       -25 N668DN       116
+##  6      554        -4      740        12 N39463       150
+##  7      555        -5      913        19 N516JB       158
+##  8      557        -3      709       -14 N829AS        53
+##  9      557        -3      838        -8 N593JB       140
+## 10      558        -2      753         8 N3ALAA       138
+## # ℹ 51,945 more rows</code></pre>
 <p><strong>Summary:</strong></p>
 <p><em>Use this space to summarize what you attempted, either from your
 own exploration or an AI explanation.</em></p>
@@ -396,7 +464,7 @@ anything important? Did you fact-check? Did you need to provide
 follow-up prompts or clarifications, or was the first response
 sufficient?</p>
 <p><em>Your answer here</em></p>
-<hr />
+<p>N/A</p>
 </div>
 </div>
 <div id="delays-weather" class="section level1">
@@ -409,11 +477,12 @@ delay and wind gust speed.</p>
 
 # join the datasets
 jan_feb_flights &lt;- jan_feb_flights %&gt;%
-  ____________(weather, by = c(______________________)) </code></pre>
+  left_join(weather, by = c(&quot;origin&quot;, &quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;hour&quot;)) 
+eval=TRUE</code></pre>
 <pre class="r"><code># is there a difference in wind speed when wind_gust is missing vs not missing?</code></pre>
 <p>Describe the difference in wind speed when wind_gust is missing vs
 not missing:</p>
-<p><em>Your answer here</em></p>
+<p>ANS: Low wind speed when wind gust is NA</p>
 <pre class="r"><code>## REMEMBER TO SET eval=TRUE
 
 # create a new variable, gust_present
