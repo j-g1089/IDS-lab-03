@@ -1,9 +1,16 @@
 ---
 title: "Lab 03 – Critical-Responsible Use of GenAI for Data Science"
-author: "Team Name: User1, User2, User3, User4"
+author: "Team Name: David, Jerry"
 date: "`r Sys.Date()`"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
+
+```{r setup, include=FALSE}
+```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -13,7 +20,7 @@ library(ggplot2)
 library(infer)
 ```
 
-_Note, if nycflights13 in not installed in your system, RStudio might prompt you to install it, or simply run `install.packages("nycflights13")` in the console._
+*Note, if nycflights13 in not installed in your system, RStudio might prompt you to install it, or simply run `install.packages("nycflights13")` in the console.*
 
 # 1. Data Structure Summary & Initial Exploration
 
@@ -29,7 +36,7 @@ jan_feb_flights <- flights %>%
 ## 1.2 Column Overview
 
 Explore the columns in `jan_feb_flights`.
-Which are numeric, which are categorical/text/factor?  
+Which are numeric, which are categorical/text/factor?\
 Are there missing values?
 
 ```{r}
@@ -54,18 +61,22 @@ Are there missing values?
 
 ```
 
-**Summary:**  
+**Summary:**
 
-_Use this space to summarize what you attempted, either from your own exploration or an AI explanation._
+*Use this space to summarize what you attempted, either from your own exploration or an AI explanation.*
 
 ## 1.3 Reflection
 
-Did the GenAI explanation (if used) help you? Which language model you explored? 
-What was clear or unclear? Did it make any errors or skip anything important? Did you fact-check? Did you need to provide follow-up prompts or clarifications, or was the first response sufficient?
+Did the GenAI explanation (if used) help you?
+Which language model you explored?
+What was clear or unclear?
+Did it make any errors or skip anything important?
+Did you fact-check?
+Did you need to provide follow-up prompts or clarifications, or was the first response sufficient?
 
-_Your answer here_
+*Your answer here*
 
----
+------------------------------------------------------------------------
 
 # 2. Delays & Weather
 
@@ -73,7 +84,7 @@ _Your answer here_
 
 ## 2.1 Code
 
-```{r eval=FALSE} 
+```{r eval=FALSE}
 ## REMEMBER TO SET eval=TRUE
 
 # join the datasets
@@ -90,16 +101,15 @@ jan_feb_flights <- jan_feb_flights %>%
 
 Describe the difference in wind speed when wind_gust is missing vs not missing:
 
-_Your answer here_
+*Your answer here*
 
-```{r eval=FALSE} 
+```{r eval=FALSE}
 ## REMEMBER TO SET eval=TRUE
 
 # create a new variable, gust_present
 jan_feb_flights <- jan_feb_flights %>%
   mutate(gust_present = _______________)
 ```
-
 
 ```{r}
 # is there a relationship between gust_present and dep_delay?
@@ -109,16 +119,17 @@ jan_feb_flights <- jan_feb_flights %>%
 
 Describe the relationship between gust_present and dep_delay you see (if any).
 
-_Your answer here_
+*Your answer here*
 
 ## 2.1 Reflection
 
-Was GenAI helpful as a navigator? Did it ask you questions to guide your thinking?
+Was GenAI helpful as a navigator?
+Did it ask you questions to guide your thinking?
 Is there anything you could learn from this to be a better navigator, next time we will work in pairs?
 
-_Your answer here_
+*Your answer here*
 
----
+------------------------------------------------------------------------
 
 # 3. Bootstrap confidence intervals
 
@@ -130,8 +141,7 @@ jfk_flights <- jan_feb_flights %>%
  filter(origin == "JFK", !is.na(dep_delay))
 ```
 
-
-```{r eval=FALSE} 
+```{r eval=FALSE}
 ## REMEMBER TO SET eval=TRUE
 
 # Compute the sample mean
@@ -151,15 +161,15 @@ boot_dist %>% ...
 
 **Interpretation for the confidence interval**:
 
-_Your answer here_
+*Your answer here*
 
 ## 3.2 Using base R
 
-The following code achieves the same using base R and a for loop. 
-Ask GenAI to explain how it works and discuss it with the group. Then find a tutor, and try to explain them what you did or didn't understand.
+The following code achieves the same using base R and a for loop.
+Ask GenAI to explain how it works and discuss it with the group.
+Then find a tutor, and try to explain them what you did or didn't understand.
 
-
-```{r eval=FALSE} 
+```{r eval=FALSE}
 ## REMEMBER TO SET eval=TRUE
 
 set.seed(99)
@@ -180,25 +190,26 @@ mean_dep_delay; ci2_lower; ci2_upper
 
 ## 3.3 Reflection
 
-What was good and what was bad of GenAI's explanation? Did you have to clarify or re-prompt? 
+What was good and what was bad of GenAI's explanation?
+Did you have to clarify or re-prompt?
 Did it match the information provided by the tutor?
 
-_Your answer here_
+*Your answer here*
 
----
+------------------------------------------------------------------------
 
 # 4. Airline Delay Analysis
 
-**Goal:** For each airline, what are the mean and median arrival delays in Jan/Feb? Which is the worst on average?
+**Goal:** For each airline, what are the mean and median arrival delays in Jan/Feb?
+Which is the worst on average?
 
-```{r eval=FALSE} 
+```{r eval=FALSE}
 ## REMEMBER TO SET eval=TRUE
 
 # Join jan_feb_flights with airlines by carrier code
 jan_feb_flights <- jan_feb_flights %>%
   ___________(airlines, by = "carrier")
 ```
-
 
 ```{r wrangling1}
 # Group by airline, summarize n, mean and median arrival delay
@@ -211,15 +222,18 @@ jan_feb_flights <- jan_feb_flights %>%
 
 **Which airline(s) had the highest mean? Is there anything notable about the worst airline?**
 
-_Your answer here_
+*Your answer here*
 
 ## 4.1 Reflection
 
-What did GenAI help with? Was anything inaccurate, missing, or did you spot any typical "AI mistakes"? Or did you instead learn something new? Did you have to clarify or re-prompt?
+What did GenAI help with?
+Was anything inaccurate, missing, or did you spot any typical "AI mistakes"?
+Or did you instead learn something new?
+Did you have to clarify or re-prompt?
 
-_Your answer here_
+*Your answer here*
 
----
+------------------------------------------------------------------------
 
 # 5. GenAI Use Reflection
 
@@ -227,27 +241,25 @@ _Your answer here_
 - What are the risks of copying code verbatim without attempting?
 - Discuss the differences for someone who is just learning to code (like you) versus someone who is already proficient.
 - What are your thoughts on attempting a task on your own first, and then asking GenAI for help or feedback?
-- What are your thoughts on using GenAI as a *thinking partner* or *pair-programming navigator*, rather than a code-generator? Do you think IDS-sidekick is a good design based on your exploration so far? 
+- What are your thoughts on using GenAI as a *thinking partner* or *pair-programming navigator*, rather than a code-generator? Do you think IDS-sidekick is a good design based on your exploration so far?
 - What is one insight or tip each of you learned today about using GenAI productively or spotting misleading AI-generated code?
 
-_Your answer here_
+*Your answer here*
 
----
+------------------------------------------------------------------------
 
-Go to Learn and share your experience with us from that workshop, this information will be very useful for further iteration of IDS and use of GenAI within that module. 
-Under Course information -> [Week4 WS GenAI Reflections](https://www.learn.ed.ac.uk/ultra/courses/_136348_1/assessment/survey/_13043810_1?gradeitemView=details)
+Go to Learn and share your experience with us from that workshop, this information will be very useful for further iteration of IDS and use of GenAI within that module.
+Under Course information -\> [Week4 WS GenAI Reflections](https://www.learn.ed.ac.uk/ultra/courses/_136348_1/assessment/survey/_13043810_1?gradeitemView=details)
 
 # 6. GenAI Acknowledgment
 
-_If you used AI for this lab, provide a statement like (make sure to specify which GenAI tool you used):_
+*If you used AI for this lab, provide a statement like (make sure to specify which GenAI tool you used):*
 
 > I used ELM with IDS-sidekick ....
-or
-> I used ChatGPT/Copilot/Claude to ....
+> or I used ChatGPT/Copilot/Claude to ....
 
----
+------------------------------------------------------------------------
 
 # Wrapping Up
 
-_Save, commit, and push your file. Remember to acknowledge any GenAI help above._
-
+*Save, commit, and push your file. Remember to acknowledge any GenAI help above.*
